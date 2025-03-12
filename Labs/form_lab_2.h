@@ -9,6 +9,7 @@ namespace Labs {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace DLL;
 
 	/// <summary>
 	/// Сводка для form_lab_2
@@ -75,6 +76,17 @@ namespace Labs {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ btn_excelwrite;
 	private: System::Windows::Forms::Button^ btn_sqlitewrite;
+	private: System::Windows::Forms::TextBox^ tb_materes;
+
+
+
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::DataGridView^ dg_materes;
+
+
+
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ label5;
 
 
 
@@ -117,9 +129,15 @@ namespace Labs {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->btn_excelwrite = (gcnew System::Windows::Forms::Button());
 			this->btn_sqlitewrite = (gcnew System::Windows::Forms::Button());
+			this->tb_materes = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->dg_materes = (gcnew System::Windows::Forms::DataGridView());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bp_task))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_start))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_result))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_materes))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// btn_back
@@ -313,11 +331,61 @@ namespace Labs {
 			this->btn_sqlitewrite->UseVisualStyleBackColor = true;
 			this->btn_sqlitewrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_dbwrite_Click);
 			// 
+			// tb_materes
+			// 
+			this->tb_materes->Enabled = false;
+			this->tb_materes->Location = System::Drawing::Point(876, 383);
+			this->tb_materes->Name = L"tb_materes";
+			this->tb_materes->Size = System::Drawing::Size(56, 20);
+			this->tb_materes->TabIndex = 26;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(549, 386);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(321, 13);
+			this->label3->TabIndex = 25;
+			this->label3->Text = L"Сумма индексов минимального и максимального элементов";
+			// 
+			// dg_materes
+			// 
+			this->dg_materes->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dg_materes->Location = System::Drawing::Point(547, 409);
+			this->dg_materes->Name = L"dg_materes";
+			this->dg_materes->RowHeadersVisible = false;
+			this->dg_materes->Size = System::Drawing::Size(512, 62);
+			this->dg_materes->TabIndex = 24;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(547, 366);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(161, 13);
+			this->label4->TabIndex = 23;
+			this->label4->Text = L"Результат работы программы";
+			// 
+			// label5
+			// 
+			this->label5->Location = System::Drawing::Point(549, 323);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(481, 29);
+			this->label5->TabIndex = 27;
+			this->label5->Text = L"Найти сумму индексов минимального и максимального элементов. Создать новый массив"
+				L", из индексов элементов исхдного массива, значения которых меньше найденного чис"
+				L"ла.";
+			// 
 			// form_lab_2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(539, 511);
+			this->ClientSize = System::Drawing::Size(1084, 511);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->tb_materes);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->dg_materes);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->btn_sqlitewrite);
 			this->Controls->Add(this->btn_excelwrite);
 			this->Controls->Add(this->label2);
@@ -343,6 +411,7 @@ namespace Labs {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bp_task))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_start))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_result))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_materes))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -376,6 +445,15 @@ namespace Labs {
 		LabsDLL::Lab2Functs::FillNewArray(array, arraylen, maxchetind, resarray);
 		LabsDLL::FunctsForAll::Vivod(maxchetind, tb_resind);
 		LabsDLL::FunctsForAll::output_mas(resarray, resarraylen, dg_result);
+
+		DLL::Class2 dllobj;
+		int* mate_array = new int[arraylen] {};
+		LabsDLL::FunctsForAll::input_mas(mate_array, arraylen, dg_start);
+		int sumind = dllobj.Sum_Index(mate_array, arraylen);
+		int mate_arrlen = arraylen;
+		dllobj.FormNewArray(mate_array, mate_arrlen, sumind);
+		LabsDLL::FunctsForAll::Vivod(sumind, tb_materes);
+		LabsDLL::FunctsForAll::output_mas(mate_array, mate_arrlen, dg_materes);
 	}
 	private: System::Void tb_arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);

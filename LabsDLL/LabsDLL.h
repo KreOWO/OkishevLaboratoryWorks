@@ -12,7 +12,6 @@ namespace LabsDLL {
     public:
         static double Vvod(TextBox^ t);
         static void Vivod(double x, TextBox^ t);
-        static void RegenerateDataGrid(int arraylen, System::Windows::Forms::DataGridView^ datagrid);
         static void output_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid);
         static void GenerateArray(int* array, int arraylen, int minvalue, int maxvalue);
         static void input_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid);

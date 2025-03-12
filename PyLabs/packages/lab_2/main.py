@@ -1,23 +1,33 @@
 from functs import gen_array, save_to_word, save_to_file, save_to_sqlite, save_to_excel
 
 
-def lab_2_start():
-    print('Выполнение лабораторной работы номер 2')
-    arr = gen_array(10, -100, 100)
-    print('Сгенерированный массив: ', arr)
+def get_index_maxind(arr):
     maxchet = min(arr) - 1
     maxind = -1
     for i in range(len(arr)):
         if (arr[i] % 2 == 0) and arr[i] > maxchet:
             maxchet = arr[i]
             maxind = i
+    return [maxind, maxchet]
 
+
+def fill_newarr(arr, maxind):
+    newarr = []
+    for i in range(len(arr)):
+        if arr[i] < maxind:
+            newarr.append(i)
+    return newarr
+
+
+
+def lab_2_start():
+    print('Выполнение лабораторной работы номер 2')
+    arr = gen_array(10, -100, 100)
+    print('Сгенерированный массив: ', arr)
+    maxind, maxchet = get_index_maxind(arr)
     newarr = []
     if maxind >= 0:
-        for i in range(len(arr)):
-            if arr[i] < maxind:
-                newarr.append(i)
-
+        newarr = fill_newarr(arr, maxind)
         print(f'Индекс максимального четного элемента ({maxchet}): {maxind}\nНовый массив: ', newarr)
     else:
         print('Все числа в массиве нечётные!')

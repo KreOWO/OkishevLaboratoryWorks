@@ -10,6 +10,7 @@ namespace Labs {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace LabsDLL;
+	using namespace DLL;
 
 	/// <summary>
 	/// Сводка для form_lab_1

@@ -34,7 +34,7 @@ namespace LabsDLL {
         t->Text = Convert::ToString(x);
     }
 
-    void FunctsForAll::RegenerateDataGrid(int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
+    void FunctsForAll::output_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
         datagrid->Columns->Clear();
         for (int i = 0; i < arraylen; i++) {
             System::Windows::Forms::DataGridViewTextBoxColumn^ newcol = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -45,10 +45,6 @@ namespace LabsDLL {
             newcol->Width = 20;
             datagrid->Columns->Add(newcol);
         }
-    }
-
-    void FunctsForAll::output_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
-        FunctsForAll::RegenerateDataGrid(arraylen, datagrid);
         for (int i = 0; i < arraylen; i++) {
             datagrid->Rows[0]->Cells[i]->Value = array[i];
         }
