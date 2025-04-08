@@ -174,7 +174,7 @@ def write_anywhere(students, mcb, result):
         print('Записано в ' + res[:-2])
 
 
-def lab_1n_start():
+def lab_1_2_start():
     print('Выполнение лабораторной работы номер 1')
     n = int(input('Введите количество студентов: '))
     genstudents = create_data(n)
